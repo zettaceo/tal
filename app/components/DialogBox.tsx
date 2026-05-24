@@ -1,106 +1,115 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 
-interface DialogBoxProps {
+interface Props {
   speaker?: string;
   text: string;
   onDone?: () => void;
   speed?: number;
 }
 
-export default function DialogBox({ speaker, text, onDone, speed = 38 }: DialogBoxProps) {
-  const [displayed, setDisplayed] = useState("");
+export default function DialogBox({ speaker, text, onDone, speed = 36 }: Props) {
+  const [shown, setShown] = useState("");
   const [done, setDone] = useState(false);
   const idx = useRef(0);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     idx.current = 0;
-    setDisplayed("");
+    setShown("");
     setDone(false);
-
     function type() {
       if (idx.current < text.length) {
-        setDisplayed(text.slice(0, idx.current + 1));
+        setShown(text.slice(0, idx.current + 1));
         idx.current++;
         timer.current = setTimeout(type, speed);
       } else {
         setDone(true);
-        if (onDone) setTimeout(onDone, 1400);
+        if (onDone) setTimeout(onDone, 1600);
       }
     }
-
     timer.current = setTimeout(type, speed);
     return () => { if (timer.current) clearTimeout(timer.current); };
   }, [text, speed, onDone]);
 
-  const handleClick = () => {
+  function skip() {
     if (!done) {
       if (timer.current) clearTimeout(timer.current);
-      setDisplayed(text);
+      setShown(text);
       setDone(true);
       if (onDone) setTimeout(onDone, 800);
     } else {
       if (onDone) onDone();
     }
-  };
+  }
 
   return (
     <div
-      className="animate-dialog"
-      onClick={handleClick}
+      className="dialog-in"
+      onClick={skip}
       style={{
         position: "absolute",
-        bottom: 18,
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: "92%",
-        maxWidth: 700,
-        background: "linear-gradient(180deg,#0a1a4a 0%,#06103a 100%)",
-        border: "3px solid #4488FF",
-        boxShadow: "0 0 0 1px #002288, inset 0 0 0 1px #2255AA",
-        borderRadius: 0,
-        padding: "10px 14px 10px 14px",
+        bottom: 0, left: 0, right: 0,
+        padding: "0 20px 18px 20px",
         cursor: "pointer",
         zIndex: 100,
-        imageRendering: "pixelated",
+        userSelect: "none",
       }}
     >
-      {speaker && (
-        <div style={{
-          position: "absolute",
-          top: -14,
-          left: 12,
-          background: "#0a1a4a",
-          border: "2px solid #4488FF",
-          padding: "1px 8px",
-          color: "#FFD700",
-          fontSize: 9,
-          fontFamily: "'Press Start 2P', monospace",
-          letterSpacing: 1,
-        }}>
-          {speaker}
-        </div>
-      )}
       <div style={{
-        color: "#FFFFFF",
-        fontSize: 8,
-        fontFamily: "'Press Start 2P', monospace",
-        lineHeight: "1.9",
-        minHeight: 48,
-        whiteSpace: "pre-wrap",
-        letterSpacing: 0.5,
+        background: "rgba(4,6,28,0.97)",
+        border: "3px solid #3366EE",
+        outline: "1px solid #1133AA",
+        borderRadius: 4,
+        padding: "10px 16px 12px 16px",
+        position: "relative",
+        boxShadow: "0 0 0 1px #0A0A3A, inset 0 0 40px rgba(10,10,80,0.6)",
       }}>
-        {displayed}
+        {/* Speaker name tab */}
+        {speaker && (
+          <div style={{
+            position: "absolute",
+            top: -17, left: 14,
+            background: "#1133BB",
+            border: "3px solid #3366EE",
+            borderBottom: "none",
+            borderRadius: "3px 3px 0 0",
+            padding: "2px 10px 0 10px",
+            fontFamily: "var(--font-pixel, monospace)",
+            fontSize: 9,
+            color: "#FFFFFF",
+            letterSpacing: 1,
+            lineHeight: 1.8,
+          }}>
+            {speaker}
+          </div>
+        )}
+
+        {/* Text */}
+        <div style={{
+          fontFamily: "var(--font-pixel, monospace)",
+          fontSize: 11,
+          color: "#FFFFFF",
+          lineHeight: 2.0,
+          minHeight: 56,
+          whiteSpace: "pre-wrap",
+          letterSpacing: 0.3,
+          textShadow: "1px 1px 0 rgba(0,0,0,0.8)",
+        }}>
+          {shown}
+        </div>
+
+        {/* Arrow */}
         {done && (
-          <span style={{
-            display: "inline-block",
-            width: 7,
-            height: 7,
-            background: "#FFD700",
-            marginLeft: 3,
-            animation: "cursor-blink 0.7s step-end infinite",
-          }} />
+          <div style={{
+            position: "absolute",
+            bottom: 8, right: 12,
+            fontFamily: "var(--font-pixel, monospace)",
+            fontSize: 10, color: "#AACCFF",
+            animation: "cursor-blink 0.8s step-end infinite",
+          }}>
+            ▼
+          </div>
         )}
       </div>
     </div>
