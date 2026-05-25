@@ -53,36 +53,36 @@ export default function Scene6({ onDone }: { onDone: () => void }) {
       )))}
 
       {/* Guard left */}
-      <div style={{ position:"absolute", bottom:195, left:280, imageRendering:"pixelated" }}>
-        <GuardSprite scale={3} />
+      <div style={{ position:"absolute", bottom:160, left:320, imageRendering:"pixelated" }}>
+        <GuardSprite scale={4} />
       </div>
 
-      {/* Princess right - hearts floating above */}
-      <div style={{ position:"relative" }}>
-        <div style={{ position:"absolute", bottom:195, right:200, imageRendering:"pixelated" }}>
-          <PrincessSprite scale={3} happy={phase==="princess"} />
+      {/* Princess on throne (right) */}
+      <ThroneStructure6 />
+      <div style={{ position:"absolute", bottom:268, right:340, imageRendering:"pixelated" }}>
+        <PrincessSprite scale={3.5} happy={phase==="princess"} />
+      </div>
+
+      {/* Hearts floating up from princess */}
+      {phase === "princess" && hearts.map(h => (
+        <div key={h.id} style={{
+          position:"absolute",
+          bottom: 380,
+          right: 340 + (h.x % 60),
+          animation:`float-heart 1.8s ease-out ${h.delay}s forwards`,
+          imageRendering:"pixelated",
+          zIndex: 50,
+        }}>
+          <PixelHeart size={h.size} color={["#FF4488","#FF88AA","#FF2266"][Math.floor(h.x)%3]} />
         </div>
-
-        {/* Hearts */}
-        {phase === "princess" && hearts.map(h => (
-          <div key={h.id} style={{
-            position:"absolute",
-            bottom: 360,
-            right: h.x + 180,
-            animation:`float-heart 1.6s ease-out ${h.delay}s forwards`,
-            imageRendering:"pixelated",
-          }}>
-            <PixelHeart size={h.size} color={["#FF4488","#FF88AA","#FF2266"][Math.floor(h.x)%3]} />
-          </div>
-        ))}
-      </div>
+      ))}
 
       {phase === "guard" && (
         <DialogBox
           speaker="SEGURANÇA"
           text={"Viu? Isso significa que você sempre pode contar comigo."}
           onDone={handleGuardDone}
-          speed={42}
+          speed={65}
         />
       )}
       {phase === "princess" && (
@@ -90,9 +90,35 @@ export default function Scene6({ onDone }: { onDone: () => void }) {
           speaker="PRINCESA TAL"
           text={"Tudo bem… muito obrigada.\nEra só isso?"}
           onDone={onDone}
-          speed={45}
+          speed={68}
         />
       )}
     </div>
+  );
+}
+
+function ThroneStructure6() {
+  return (
+    <>
+      <div style={{ position:"absolute", bottom:160, right:280, width:280, height:16, background:"#C09020" }} />
+      <div style={{ position:"absolute", bottom:160, right:295, width:250, height:8, background:"#E0B030" }} />
+      <div style={{ position:"absolute", bottom:176, right:320 }}>
+        <svg width={200} height={250} viewBox="0 0 160 200" style={{ imageRendering:"pixelated" }}>
+          <rect x="20" y="120" width="120" height="24" fill="#8A5010" />
+          <rect x="18" y="118" width="124" height="6" fill="#C07020" />
+          <rect x="20" y="20" width="120" height="102" fill="#6A3808" />
+          <rect x="18" y="18" width="124" height="104" fill="none" stroke="#C07020" strokeWidth={3} />
+          <rect x="10" y="8" width="140" height="16" fill="#8A5010" rx="4" />
+          <rect x="40" y="0" width="80" height="16" fill="#C07020" rx="4" />
+          <rect x="60" y="28" width="40" height="30" fill="#C09020" rx="2" />
+          <rect x="28" y="122" width="104" height="18" fill="#9B1A3A" />
+          <rect x="30" y="124" width="100" height="14" fill="#C02048" />
+          <rect x="16" y="100" width="20" height="44" fill="#7A4008" />
+          <rect x="124" y="100" width="20" height="44" fill="#7A4008" />
+          <rect x="22" y="144" width="14" height="40" fill="#5A3006" />
+          <rect x="124" y="144" width="14" height="40" fill="#5A3006" />
+        </svg>
+      </div>
+    </>
   );
 }

@@ -101,7 +101,7 @@ export default function Scene1({ onDone }: { onDone: () => void }) {
       <Castle />
 
       {/* ── GUARD ────────────────────────────────────────────────────── */}
-      <GuardPixel x={300} />
+      <GuardPixel x={290} />
 
       {/* ── SMALL FLOWERS ────────────────────────────────────────────── */}
       {[680,720,750,800,850,1050,1080].map((x,i)=>(
@@ -113,7 +113,7 @@ export default function Scene1({ onDone }: { onDone: () => void }) {
         speaker="SEGURANÇA"
         text={"Nossa… a Princesa Tal tem tantas responsabilidades...\nEla está sobrecarregada física e emocionalmente...\nVou até a sala do trono animá-la."}
         onDone={onDone}
-        speed={38}
+        speed={65}
       />
     </div>
   );
@@ -401,7 +401,7 @@ function GuardPixel({x}:{x:number}) {
     "BLLLLLLBLLLLB.....",
   ];
   return (
-    <div style={{position:"absolute",bottom:200,left:x,imageRendering:"pixelated"}}>
+    <div style={{position:"absolute",bottom:228,left:x,imageRendering:"pixelated"}}>
       {rows.map((row,ri)=>(
         <div key={ri} style={{display:"flex"}}>
           {row.split("").map((c,ci)=>(

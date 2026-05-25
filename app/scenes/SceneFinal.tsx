@@ -15,10 +15,10 @@ export default function SceneFinal({ onDone }: { onDone: () => void }) {
 
   useEffect(() => {
     if (phase === "sword") {
-      setTimeout(() => setPhase("headfly"), 800);
+      setTimeout(() => setPhase("headfly"), 1200);
     }
     if (phase === "headfly") {
-      setTimeout(() => { setPhase("princess2"); setLaugh(true); }, 1200);
+      setTimeout(() => { setPhase("princess2"); setLaugh(true); }, 1500);
     }
   }, [phase]);
 
@@ -76,7 +76,7 @@ export default function SceneFinal({ onDone }: { onDone: () => void }) {
 
       {/* Guard body (headless when head flying) */}
       {phase !== "sword" && phase !== "headfly" && phase !== "princess2" && phase !== "freeze" && (
-        <div style={{ position:"absolute", bottom:190, left:"50%", transform:"translateX(-220px)", imageRendering:"pixelated" }}>
+        <div style={{ position:"absolute", bottom:170, left:"50%", transform:"translateX(-220px)", imageRendering:"pixelated" }}>
           <svg width={60} height={96} viewBox="0 0 20 32" style={{ imageRendering:"pixelated" }}>
             {/* head */}
             <rect x="6" y="0" width="8" height="8" fill="#F4C48A" />
@@ -119,7 +119,7 @@ export default function SceneFinal({ onDone }: { onDone: () => void }) {
 
       {/* Headless body + gush */}
       {(phase === "headfly" || phase === "princess2" || phase === "freeze") && (
-        <div style={{ position:"absolute", bottom:190, left:"50%", transform:"translateX(-220px)", imageRendering:"pixelated" }}>
+        <div style={{ position:"absolute", bottom:170, left:"50%", transform:"translateX(-220px)", imageRendering:"pixelated" }}>
           <svg width={60} height={72} viewBox="0 0 20 24" style={{ imageRendering:"pixelated" }}>
             {/* blood gush (comic) */}
             <rect x="6" y="0" width="8" height="3" fill="#FF2222" />
@@ -139,7 +139,7 @@ export default function SceneFinal({ onDone }: { onDone: () => void }) {
       )}
 
       {/* Princess (sword raised during sword phase) */}
-      <div style={{ position:"absolute", bottom:190, left:"50%", transform:"translateX(50px)", imageRendering:"pixelated" }}>
+      <div style={{ position:"absolute", bottom:170, left:"50%", transform:"translateX(50px)", imageRendering:"pixelated" }}>
         <PrincessSprite scale={3} happy={phase==="princess2"||phase==="freeze"} />
         {phase === "sword" && (
           <div style={{
@@ -175,7 +175,7 @@ export default function SceneFinal({ onDone }: { onDone: () => void }) {
           speaker="PRINCESA TAL"
           text={"Que lindo…"}
           onDone={handlePrincess1Done}
-          speed={55}
+          speed={75}
         />
       )}
       {(phase === "princess2" || phase === "freeze") && (
@@ -183,7 +183,7 @@ export default function SceneFinal({ onDone }: { onDone: () => void }) {
           speaker="PRINCESA TAL"
           text={"Que dramático. Kkkkk."}
           onDone={handlePrincess2Done}
-          speed={50}
+          speed={65}
         />
       )}
 

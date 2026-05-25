@@ -9,13 +9,13 @@ export default function Scene4({ onDone }: { onDone: () => void }) {
 
   useEffect(() => {
     const start = Date.now();
-    const duration = 2000;
-    const target = 380;
+    const duration = 3500;
+    const target = 420;
     function tick() {
       const t = Math.min((Date.now() - start) / duration, 1);
       setGuardX(-100 + t * (target + 100));
       if (t < 1) requestAnimationFrame(tick);
-      else setStep(1);
+      else setTimeout(() => setStep(1), 600);
     }
     requestAnimationFrame(tick);
   }, []);
@@ -73,24 +73,24 @@ export default function Scene4({ onDone }: { onDone: () => void }) {
       </div>
 
       {/* Princess */}
-      <div style={{ position:"absolute", bottom:258, left:"50%", transform:"translateX(-50%) translateX(-10px)", imageRendering:"pixelated" }}>
-        <PrincessSprite scale={3} />
+      <div style={{ position:"absolute", bottom:268, left:"50%", transform:"translateX(-50%) translateX(-10px)", imageRendering:"pixelated" }}>
+        <PrincessSprite scale={3.5} />
       </div>
 
       {/* Walking guard */}
-      <div style={{ position:"absolute", bottom:195, left: guardX, imageRendering:"pixelated" }}>
-        <GuardSprite scale={3} walking={guardX < 360} kneeling={step===1} />
+      <div style={{ position:"absolute", bottom:160, left: guardX, imageRendering:"pixelated" }}>
+        <GuardSprite scale={4} walking={guardX < 400} kneeling={step===1} />
       </div>
 
       {step === 0 && (
-        <DialogBox speaker="SEGURANÇA" text={"Com sua licença, princesa."} speed={55} />
+        <DialogBox speaker="SEGURANÇA" text={"Com sua licença, princesa."} speed={70} />
       )}
       {step === 1 && (
         <DialogBox
           speaker="PRINCESA TAL"
           text={"Erga-se e diga o que deseja."}
           onDone={onDone}
-          speed={50}
+          speed={70}
         />
       )}
     </div>

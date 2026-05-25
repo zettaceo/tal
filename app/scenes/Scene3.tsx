@@ -97,8 +97,8 @@ export default function Scene3({ onDone }: { onDone: () => void }) {
       </div>
 
       {/* Princess on throne */}
-      <div style={{ position:"absolute", bottom:258, left:"50%", transform:"translateX(-50%) translateX(-10px)", imageRendering:"pixelated" }}>
-        <PrincessSprite scale={3} />
+      <div style={{ position:"absolute", bottom:268, left:"50%", transform:"translateX(-50%) translateX(-10px)", imageRendering:"pixelated" }}>
+        <PrincessSprite scale={3.5} />
       </div>
 
       {/* Golden chandeliers */}
@@ -125,7 +125,7 @@ export default function Scene3({ onDone }: { onDone: () => void }) {
         speaker="PRINCESA TAL"
         text={"Pode entrar."}
         onDone={onDone}
-        speed={60}
+        speed={75}
       />
     </div>
   );

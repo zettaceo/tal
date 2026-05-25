@@ -124,11 +124,11 @@ export default function Scene10({ onDone }: { onDone: () => void }) {
       ))}
 
       {/* Characters side by side */}
-      <div style={{ position:"absolute", bottom:190, left:"50%", transform:"translateX(-200px)", imageRendering:"pixelated" }}>
-        <GuardSprite scale={3} />
+      <div style={{ position:"absolute", bottom:170, left:"50%", transform:"translateX(-200px)", imageRendering:"pixelated" }}>
+        <GuardSprite scale={4} />
       </div>
-      <div style={{ position:"absolute", bottom:190, left:"50%", transform:"translateX(50px)", imageRendering:"pixelated" }}>
-        <PrincessSprite scale={3} happy />
+      <div style={{ position:"absolute", bottom:170, left:"50%", transform:"translateX(60px)", imageRendering:"pixelated" }}>
+        <PrincessSprite scale={3.5} happy />
       </div>
 
       {/* Firework reflections */}
@@ -144,7 +144,7 @@ export default function Scene10({ onDone }: { onDone: () => void }) {
         speaker="SEGURANÇA"
         text={SPEECH}
         onDone={onDone}
-        speed={28}
+        speed={55}
       />
     </div>
   );

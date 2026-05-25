@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Press_Start_2P } from "next/font/google";
 import "./globals.css";
 
@@ -12,7 +12,13 @@ const pixelFont = Press_Start_2P({
 export const metadata: Metadata = {
   title: "A História da Princesa Tal",
   description: "Experiência cinematográfica pixel art 16-bit estilo SNES",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

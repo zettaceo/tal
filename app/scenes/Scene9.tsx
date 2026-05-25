@@ -33,8 +33,8 @@ export default function Scene9({ onDone }: { onDone: () => void }) {
     const timeout = setTimeout(() => {
       clearInterval(interval);
       setFade(true);
-      setTimeout(onDone, 1200);
-    }, 7000);
+      setTimeout(onDone, 1400);
+    }, 9500);
     return () => { clearInterval(interval); clearTimeout(timeout); };
   }, [onDone]);
 
@@ -110,13 +110,11 @@ export default function Scene9({ onDone }: { onDone: () => void }) {
       ))}
 
       {/* Characters on battlement */}
-      {/* Guard */}
-      <div style={{ position:"absolute", bottom:200, left:"50%", transform:"translateX(-160px)", imageRendering:"pixelated" }}>
-        <GuardSprite scale={3} />
+      <div style={{ position:"absolute", bottom:170, left:"50%", transform:"translateX(-180px)", imageRendering:"pixelated" }}>
+        <GuardSprite scale={4} />
       </div>
-      {/* Princess */}
-      <div style={{ position:"absolute", bottom:200, left:"50%", transform:"translateX(40px)", imageRendering:"pixelated" }}>
-        <PrincessSprite scale={3} happy />
+      <div style={{ position:"absolute", bottom:170, left:"50%", transform:"translateX(60px)", imageRendering:"pixelated" }}>
+        <PrincessSprite scale={3.5} happy />
       </div>
 
       {/* Firework light reflection on characters */}

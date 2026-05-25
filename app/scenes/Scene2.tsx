@@ -10,7 +10,7 @@ export default function Scene2({ onDone }: { onDone: () => void }) {
 
   useEffect(() => {
     const start = Date.now();
-    const duration = 3200;
+    const duration = 5500;
     const target = 560;
     function tick() {
       const elapsed = Date.now() - start;
@@ -95,12 +95,12 @@ export default function Scene2({ onDone }: { onDone: () => void }) {
       {/* Walking Guard */}
       <div style={{
         position:"absolute",
-        bottom:230,
+        bottom:240,
         left: guardX,
         transition:"none",
         imageRendering:"pixelated",
       }}>
-        <GuardSprite scale={3} walking={true} />
+        <GuardSprite scale={4} walking={true} />
       </div>
 
       {/* Ambient floor glow from torches */}
@@ -114,7 +114,7 @@ export default function Scene2({ onDone }: { onDone: () => void }) {
         speaker="SEGURANÇA"
         text={"Devo chegar logo à sala do trono..."}
         onDone={onDone}
-        speed={50}
+        speed={70}
       />
     </div>
   );
